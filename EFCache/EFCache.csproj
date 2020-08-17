@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<AssemblyName>EFCache.POC.Runner</AssemblyName>
+		<RootNamespace>EFCache.POC.Runner</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.7" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.7" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.7" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Configurations\Configurations.csproj" />
+	  <ProjectReference Include="..\IoC\IoC.csproj" />
+	  <ProjectReference Include="..\RedisCacheProvider\RedisCacheProvider.csproj" />
+	  <ProjectReference Include="..\SqlServerAccess\SqlServerAccess.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="appSettings.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+</Project>
