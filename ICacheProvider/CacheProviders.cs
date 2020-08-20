@@ -7,7 +7,6 @@ namespace EFCache.POC.InMemCacheProvider
     {
         public void Register(IServiceCollection serviceCollection)
         {
-            return;
             serviceCollection.AddDistributedMemoryCache();
         }
 

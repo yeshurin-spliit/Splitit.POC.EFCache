@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Design;
+﻿using System;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading.Tasks;
 using EFCache.POC.Configurations;
@@ -30,17 +31,27 @@ namespace EFCache.POC.Runner
             ServiceLocator.Current.SetLocatorProvider(services.BuildServiceProvider());
             var serviceProvider = services.BuildServiceProvider();
             var repository = serviceProvider.GetService<ISplititRepository<Currency>>();
-            var cacheInstances = serviceProvider.GetServices<IDistributedCache>();
+            //var cacheInstances = serviceProvider.GetServices<IDistributedCache>().ToList();
+            //cacheInstances.ForEach(a =>
+            //{
+            //    Console.WriteLine(a.GetType().Name);
+            //});
+            CallAndDelay(serviceProvider, 1000, 1);
+            CallAndDelay(serviceProvider, 3000, 2);
+            CallAndDelay(serviceProvider, 10000, 3);
+            CallAndDelay(serviceProvider, 4000, 4);
+            CallAndDelay(serviceProvider, 12000, 5);
+            CallAndDelay(serviceProvider, 30000, 6);
+            CallAndDelay(serviceProvider, 1000, 7);
+            CallAndDelay(serviceProvider, 1000, 8);
+            
+        }
 
-            var test = repository.Filter(a => a.Id > 1);
-
-            Task.WaitAll(Task.Delay(30000));
-
-            test = repository.Filter(a => a.Id > 2);
-
-            Task.WaitAll(Task.Delay(35000));
-
-            test = repository.Filter(a => a.Id > 3);
+        private void CallAndDelay(ServiceProvider serviceProvider, int msToWait, int minId)
+        {
+            var repository = serviceProvider.GetService<ISplititRepository<Currency>>();
+            repository.Filter(a => a.Id > minId);
+            Task.WaitAll(Task.Delay(msToWait));
         }
     }
 }

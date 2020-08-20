@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EFCache.POC.IoC.Extensions
@@ -28,6 +29,11 @@ namespace EFCache.POC.IoC.Extensions
         public TService GetInstance<TService>()
         {
             return _currentServiceProvider.GetService<TService>();
+        }
+
+        public IEnumerable<TService> GetInstances<TService>()
+        {
+            return _currentServiceProvider.GetServices<TService>();
         }
     }
 }

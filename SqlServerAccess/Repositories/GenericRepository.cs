@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using EFCache.POC.DatabaseAccess;
@@ -41,7 +42,7 @@ namespace EFCache.POC.SqlServer.Repositories
             lock (ContextLocker.Instance.GetLockingObject(_contextType))
             {
                 var query = ApplySkipTakeAndOrder(take, skip, orderBy, orderingDirection);
-                return query.Cached(TimeSpan.FromMinutes(1)).Where(predicate).ToList();
+                return query.Cached(TimeSpan.FromSeconds(5), TimeSpan.FromMinutes(1)).Where(predicate).ToList();
             }
         }
 
